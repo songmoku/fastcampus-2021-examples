@@ -1,23 +1,28 @@
-/* eslint-disable no-console */
-// Prototype
-function Person(name) {
-  this.name = name
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-new */
+
+function retrunPromiseForTimeout() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(Math.random())
+    }, 1000)
+  })
 }
 
-Person.prototype.greet = function greet() {
-  return `Hi, ${this.name}!`
-}
-
-function Student(name) {
-  this.name = name
-}
-
-Student.prototype.study = function study() {
-  return `${this.name}! Youre studying`
-}
-
-Object.setPrototypeOf(Student.prototype, Person.prototype)
-
-const me = new Student('Raphael')
-console.log(me.greet())
-console.log(me.study())
+new Promise((resolve, reject) => {
+  console.log('Before timeout')
+  setTimeout(() => {
+    resolve(Math.random())
+    console.log('After resolve')
+  }, 1000)
+})
+  .then((value) => {
+    console.log('then 1')
+    console.log('value', value)
+  })
+  .then(() => {
+    console.log('then 2')
+  })
+  .then(() => {
+    console.log('then 3')
+  })
